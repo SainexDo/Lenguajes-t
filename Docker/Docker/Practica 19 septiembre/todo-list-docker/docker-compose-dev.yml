@@ -1,0 +1,40 @@
+services:
+  mysql:
+    image: mysql:latest
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=todo_db
+    volumes:
+      - mysql_data:/data/db
+      - ./mysql-init:/docker-entrypoint-initdb.d:ro
+
+  node_server:
+    container_name: node_server
+    image: node_server
+    build:
+      context: ./node-server
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+
+  todo:
+    container_name: todo_list
+    image: todo_list
+    build:
+      context: ./todo-list-react
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./todo-list-react:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "5173:5173"
+    depends_on:
+      - node_server
+
+volumes:
+  mysql_data:
+      

@@ -1,0 +1,28 @@
+services:
+  web:
+    image: django_app
+    container_name: django_app
+    build:
+      context: ./app
+    environment:
+      - DJANGO_DEBUG=True
+      - DJANGO_ALLOWED_HOSTS=mysql
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app #/app tiene que ser igual a lo que le puse en el WORKDIR del Dockerfile
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:latest
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=default
+    volumes:
+      - mysql_data:/data/db
+      - ./mysql-init:/docker-entrypoint-initdb.d:ro
+volumes:
+  mysql_data:

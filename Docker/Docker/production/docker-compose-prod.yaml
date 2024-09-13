@@ -1,0 +1,12 @@
+services:
+  app:
+    container_name: react-production
+    image: react-production:prod
+    build:
+      context: ./react-production
+      target: production
+      args:
+        - NODE_ENV=production
+      dockerfile: dockerfile.prod
+    ports:
+      - 80:80

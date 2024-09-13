@@ -1,0 +1,13 @@
+services:
+  web:
+    image: django_app
+    container_name: Django_Contenedor
+    build:
+      context: ./myapp  
+    environment:
+      - DJANGO_DEBUG=True
+      - DJANGO_ALLOWED_HOSTS=localhost
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./myapp:/app #/app tiene que ser igual a lo que le puse en el WORKDIR del Dockerfile

@@ -1,0 +1,9 @@
+.dockerignore
+node_modules
+**/node_modules
+**/.git
+**/.DS_Store
+.gitignore
+README.md
+eslint.config.js
+build

@@ -1,0 +1,10 @@
+django-admin startproject Myapp
+control + shift + p = Python select interpreter y seleccionar el que sale .venv recomendado
+
+Comando para iniciar el docker = docker build -t mysite . # crea la imagen, necesita el punto
+docker compose up -d
+
+
+- Las Views son lo que se va a ver visualmente con el Hello World que se hizo en la Views de polls
+- Las urls es lo que interactua el models con las Views, basicamente es el router como en react
+- Las migraciones representan los cambios para la base de datos

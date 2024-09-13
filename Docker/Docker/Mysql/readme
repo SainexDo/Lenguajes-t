@@ -1,0 +1,12 @@
+docker exec -it fbef2fe7f16c /usr/bin/mysql -u root -p
+fbef2fe7f16c es el ID de el contenedor
+docker compose up -d
+
+docker exec 71112d416745 /usr/bin/mysqldump -u root --password=root dummy_db > backup.sql
+71112d416745 es el ID de el contenedor y backup.sql va a ser elarchivo de backup
+docker exec -it 71112d416745 bash
+
+docker cp backup.sql 71112d416745:/mysql_backups/backup.sql
+
+Get-Content backup.sql | docker exec -i 71112d416745 /usr/bin/mysql -u root --password=root dummy_db
+# Get-Content /mysql_backups/backup.sql | docker exec -i 71112d416745 /usr/bin/mysql -u root --password=root dummy_db

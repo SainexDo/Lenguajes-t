@@ -1,0 +1,14 @@
+services:
+  todo:
+    container_name: todo_list
+    image: todo_list:prod
+    build:
+      context: ./todo-list-react
+      target: production-stage
+      args:
+        - NODE_ENV=production
+      dockerfile: Dockerfile.prod
+    ports:
+      - 80:80
+    environment:
+      - NODE_ENV=production
